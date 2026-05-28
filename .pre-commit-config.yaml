@@ -1,0 +1,25 @@
+files: ^vscode-settings/src/vscode_settings/
+
+repos:
+  - repo: local
+    hooks:
+      - id: end-of-file-fixer
+        name: end-of-file-fixer
+        entry: end-of-file-fixer
+        language: system
+        types: [text]
+      - id: trailing-whitespace
+        name: trailing-whitespace
+        entry: trailing-whitespace-fixer
+        language: system
+        types: [text]
+      - id: mixed-line-ending
+        name: mixed-line-ending
+        entry: mixed-line-ending --fix=lf
+        language: system
+        types: [text]
+      - id: ruff-import-order
+        name: ruff import order
+        entry: ruff check --fix --select I
+        language: system
+        types_or: [python, pyi]

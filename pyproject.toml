@@ -1,0 +1,50 @@
+[build-system]
+requires = ["uv_build>=0.11.16,<0.12"]
+build-backend = "uv_build"
+
+
+[project]
+name = "vscode-settings"
+version = "0.1.0"
+description = "VSCode profile and settings store"
+readme = "README.md"
+requires-python = ">=3.13"
+
+dependencies = [
+    "pydantic>=2.0,<3.0",
+    "pydantic-ai==1.85.0",
+    "pydantic-ai-slim==1.85.0",
+    "pydantic-graph==1.85.0",
+
+    "click>=8.1.0",
+    "jinja2>=3.1.0",
+    "jsonschema>=4.0.0"
+]
+
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit",
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "jupyterlab",
+    "jupyter-console"
+]
+
+
+[project.scripts]
+export = "vscode_settings.__main__:cli"
+
+
+[tool.ruff.lint]
+# Enable isort-compatible import sorting rules
+extend-select = ["I"]
+
+
+[tool.pyright]
+reportArgumentType = "none"
+reportPossiblyUnboundVariable = "none"
+include = ["**/*.py"]
+exclude = ["**/node_modules", "**/__pycache__", "**/.*", "**/.git", ".venv"]
+pythonVersion = "3.13"
+

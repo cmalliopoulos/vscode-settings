@@ -1,0 +1,15 @@
+*.env
+*.venv/
+*var/
+snowflake/arcv/
+
+.vscode/
+.idea/
+
+*__pycache__/
+*.ropeproject/
+
+*README/
+!*README/README.tex
+
+*.secrets/
