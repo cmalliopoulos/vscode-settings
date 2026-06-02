@@ -1,6 +1,30 @@
 import yaml
 from typing import Any
 
+from json import JSONDecoder, JSONDecodeError
+
+class MyDecoder(JSONDecoder):
+    """ safe json decoder: if s is any invalid json string in decode(s), returns s.
+        If s contains newlines, escapes them.
+        Usage:
+        json.loads(json_string, cls=MyDecoder)
+    """
+    def decode(self, s: str, *args, **kwargs) -> dict | str:
+        slis = list(s)
+        while True:
+            try:
+                _ = super().decode("".join(slis))
+                break
+            except JSONDecodeError as err:
+                if slis[err.pos] == "\n":
+                    # We replace with a random unicode code (without particular meaning)
+                    # We cannot replace directly with "\\n" because it is 2 characters.
+                    # If we want direct substitution we have to "play" with err.pos (the code becomes more involved)
+                    slis[err.pos] = "\u1234"
+                else: 
+                    return s
+        return super().decode("".join(slis).replace("\u1234", "\\n"))
+
 class LiteralDumper(yaml.SafeDumper):
     escapes = ["\n", "\t"]
 
