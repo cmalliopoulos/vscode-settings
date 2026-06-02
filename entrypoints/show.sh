@@ -39,7 +39,7 @@ with open("$profile_path") as fd:
     res = json.load(fd)
     print(
         yaml.dump(
-            [json.loads(res[key]) for key in res.keys() if key != "name"], 
+            [json.loads(res[key], cls=utl.MyDecoder) for key in res.keys()], 
             Dumper=utl.LiteralDumper
         )
     )
