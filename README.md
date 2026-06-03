@@ -26,6 +26,9 @@ is installed on the server:
 code --install-extension <extension-id>
 ```
 `<extension-id>` is the fullname of the extension displayed on the far right of the extension's main page.  
+Note that the `code` command is ONLY available in the integrated terminal of the remote project. It is not installed
+systemwise in `daba-ml01` -- to see it, try `which code` in the integrated terminal.  
+
 
 ### Database Profiles
 I use the `MSSQL` and the `Oracle Developer` extension on `daba-ml01`. They don't coexist well, so I created a separate 
@@ -34,3 +37,6 @@ profile for each. The profiles have:
    as profile logo for the `mssql` profile and,
 2. red-ish background for the selected pane in the activity bar and a database icon as profile logo for the `oracle` profile
 
+### `SQLDeveloper` important configuration settings
+1. `sqldeveloper.connections.focus` activates the Oracle connections pane in the activity bar. shortcut: Shift+&#8984;+C
+2. `files.associations`: the format is `"*.sql": "oracle-sql"`.
